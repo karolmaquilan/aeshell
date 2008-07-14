@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block header %}<h1>Edit Post for User: {{ user }} </h1>{% endblock %}
+{% block content %}
+<form action="/update" method="post">
+  <input name="post" type="hidden" value="{{post.key.id}}"></input>
+  <input name="content" value="{{post.content}}"></input>
+  <input type="submit" value="update"></input>
+</form>
+{% endblock %}
+{% block footer %}
+<footer>
+Copyright &copy; {% now "Y" %} Gavin Doughtie
+</footer>
+{% endblock %}

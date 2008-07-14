@@ -1,0 +1,17 @@
+{% comment %}
+This page defines the structure for all pages on the site. Note that
+the endcomment block is on the same line as the DOCTYPE so that tag
+appears on the first line of the generated HTML.
+{% endcomment %}<!DOCTYPE html>
+<html>
+<head>
+<title>{{title}}</title>
+<link rel="stylesheet" href="css/base.css">
+{%block pagestyles %}{% endblock %}
+</head>
+<body>
+{%block header %}{% endblock %}
+{%block content %}{% endblock %}
+{%block footer %}{% endblock %}
+</body>
+</html>
