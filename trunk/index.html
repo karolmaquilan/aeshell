@@ -1,0 +1,42 @@
+{% comment %}
+This is how you format comments in the templating system. The first line
+below says that this template "extends" the "base.html" template, meaning
+that content from this template will be added to the structure specified
+in base.html.
+{% endcomment %}
+{% extends "base.html" %}
+{% block header %}<h1>User: {{ user }} <a href="{{logout}}"">logout</a></h1>{% endblock %}
+{% block content %}
+{% if filter %}<p>Active Filter: {{filter}} <a href="/">show all</a></p>{% endif %}
+<form action="/" method="get">
+  <input name="filter">
+  <input type="submit" value="Search"></input>
+</form>
+<form action="/create" method="post">
+  <input name="content">
+  <input type="submit" value="create"></input>
+</form>
+{% block posts %}
+<form action="/delete" method="post">
+{% for post in posts %}
+      <p>
+        {% ifequal post.author user %}
+         <a href="update?post={{ post.key.id }}">update</a>
+         <button type="submit" name="post" value="{{ post.key.id }}" class="delete">delete</button>
+        {% endifequal %}
+	{{ post.content|escape }} 
+      {% if post.author %}
+        <strong>({{ post.author.nickname|escape }})</strong>
+      {% else %}
+       (anonymous)
+      {% endif %}
+      </p>
+{% endfor %}
+</form>
+{% endblock %}
+{% endblock %}
+{% block footer %}
+<footer>
+Copyright &copy; {% now "Y" %} Gavin Doughtie
+</footer>
+{% endblock %}
